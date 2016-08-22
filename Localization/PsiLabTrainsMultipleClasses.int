@@ -1,0 +1,7 @@
+[MCPL_MCMListener]
++ModName="Psi Lab Trains Multiple Classes"
++OrderedTreeGroupName="Classes with One Perk per Rank Trainable in Psi Lab"
++RandomTreeGroupName="Classes with All Perks Randomly Trainable in Psi Lab"
++RestartLabelText="Warning: Changes here require a restart of XCOM 2 in order to fully take effect"
++OrderedTreeCheckboxDesc="Allows soldiers of this class to be trained in the psi lab; they will be able to learn one perk for each rank, like the four main vanilla classes"
++RandomTreeCheckboxDesc="Allows soldiers of this class to be trained in the psi lab; they will be able to learn all perks in a random order, like the vanilla Psi Operative"
