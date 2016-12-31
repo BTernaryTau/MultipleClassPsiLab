@@ -79,3 +79,44 @@ function SetProjectFocus(StateObjectReference FocusRef, optional XComGameState N
 		CompletionDateTime.m_iYear = 9999;
 	}
 }
+
+function int CalculatePointsToTrain(optional bool bClassTraining = false)
+{
+	local XComGameStateHistory History;
+	local XComGameState_HeadquartersXCom XComHQ;
+	local XComGameState_Unit Unit;
+	local LWTuple BirthdayTuple;
+	local LWTValue Birthday;
+	local int RankDifference;
+	local bool bIsBirthday;
+	
+	History = `XCOMHISTORY;
+	XComHQ = XComGameState_HeadquartersXCom(History.GetSingleGameStateObjectForClass(class'XComGameState_HeadquartersXCom'));
+
+	// Reduce training time by 20% if it's the player's birthday
+	BirthdayTuple = new class'LWTuple';
+	BirthdayTuple.Id = 'Birthday';
+	`XEVENTMGR.TriggerEvent('Birthday', BirthdayTuple);
+	bIsBirthday = BirthdayTuple.Data.Length == 1 && BirthdayTuple.Data[0].kind == LWTVBool && BirthdayTuple.Data[0].b;
+	
+	if (bClassTraining && bIsBirthday)
+	{
+		return XComHQ.GetPsiTrainingDays() * XComHQ.XComHeadquarters_DefaultPsiTrainingWorkPerHour * 24 * 0.8;
+	}
+	else if (bIsBirthday)
+	{
+		Unit = XComGameState_Unit(History.GetGameStateForObjectID(ProjectFocus.ObjectID));
+		RankDifference = Max(iAbilityRank - Unit.GetRank(), 0);
+		return (XComHQ.GetPsiTrainingDays() + Round(XComHQ.GetPsiTrainingScalar() * float(RankDifference))) * XComHQ.XComHeadquarters_DefaultPsiTrainingWorkPerHour * 24 * 0.8;
+	}
+	else if (bClassTraining)
+	{
+		return XComHQ.GetPsiTrainingDays() * XComHQ.XComHeadquarters_DefaultPsiTrainingWorkPerHour * 24;
+	}
+	else
+	{
+		Unit = XComGameState_Unit(History.GetGameStateForObjectID(ProjectFocus.ObjectID));
+		RankDifference = Max(iAbilityRank - Unit.GetRank(), 0);
+		return (XComHQ.GetPsiTrainingDays() + Round(XComHQ.GetPsiTrainingScalar() * float(RankDifference))) * XComHQ.XComHeadquarters_DefaultPsiTrainingWorkPerHour * 24;
+	}
+}

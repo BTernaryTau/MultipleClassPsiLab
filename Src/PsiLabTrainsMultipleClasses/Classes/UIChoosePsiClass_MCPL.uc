@@ -1,6 +1,6 @@
 class UIChoosePsiClass_MCPL extends UIChooseClass;
 
-var StateObjectReference m_StaffSlotRef; // set in UIFacility_PsiLabSlot_MCPL
+var StateObjectReference m_StaffSlotRef; // set in MCPL_UIScreenListener
 
 simulated function array<X2SoldierClassTemplate> GetClasses()
 {

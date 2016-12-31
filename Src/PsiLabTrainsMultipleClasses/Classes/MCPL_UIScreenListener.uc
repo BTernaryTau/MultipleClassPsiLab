@@ -11,8 +11,8 @@ event OnInit(UIScreen Screen)
 	{
 		`HQPRES.Get2DMovie().DialogBox.RemoveDialog(); // since the dialog box is now initialized, it can be fully removed
 	}
-	// Replace the current screen if it is a UIChoosePsiAbility and psi operatives are an ordered tree class
-	else if (UIChoosePsiAbility(Screen) != none && class'MCPL_Utilities'.static.IsOrderedTreeTrainable('PsiOperative'))
+	// Replace the current screen if it is a UIChoosePsiAbility
+	else if (UIChoosePsiAbility(Screen) != none/* && class'MCPL_Utilities'.static.IsOrderedTreeTrainable('PsiOperative')*/)
 	{
 		`HQPRES.ScreenStack.Pop(Screen);
 		NewScreen = `HQPRES.Spawn(class'UIChoosePsiAbility_MCPL', `HQPRES);
