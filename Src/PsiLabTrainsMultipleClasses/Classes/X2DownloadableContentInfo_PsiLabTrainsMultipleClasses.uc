@@ -44,7 +44,15 @@ static event OnPostTemplatesCreated()
 	StaffSlotTemplate = X2StaffSlotTemplate(StrategyElementTemplateManager.FindStrategyElementTemplate('PsiChamberSoldierStaffSlot'));
 	StaffSlotTemplate.FillFn = class'MCPL_Utilities'.static.FillPsiChamberSoldierSlot;
 	StaffSlotTemplate.ShouldDisplayToDoWarningFn = class'MCPL_Utilities'.static.ShouldDisplayPsiChamberSoldierToDoWarning;
-	StaffSlotTemplate.IsUnitValidForSlotFn = class'MCPL_Utilities'.static.IsUnitValidForPsiChamberSoldierSlot;
+
+	if (class'MCPL_Utilities'.static.IsLW2Present())
+	{
+		StaffSlotTemplate.IsUnitValidForSlotFn = class'MCPL_Utilities'.static.IsUnitValidForPsiChamberSoldierSlotLW2;
+	}
+	else
+	{
+		StaffSlotTemplate.IsUnitValidForSlotFn = class'MCPL_Utilities'.static.IsUnitValidForPsiChamberSoldierSlot;
+	}
 
 	SoldierClassTemplateManager = class'X2SoldierClassTemplateManager'.static.GetSoldierClassTemplateManager();
 

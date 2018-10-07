@@ -39,6 +39,9 @@
     <Content Include="Src\LW_Tuple\Classes\LWTuple.uc">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="Src\LW_Tuple\Classes\XComLWTuple.uc">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="Src\PsiLabTrainsMultipleClasses\Classes\MCPL_Defaults.uc">
       <SubType>Content</SubType>
     </Content>

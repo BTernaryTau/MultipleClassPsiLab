@@ -17,6 +17,16 @@ simulated function EventListenerReturn RookiePsiTrainingCheck(Object EventData, 
 	{
 		return ELR_NoInterrupt;
 	}
+	else if (NewClassName == 'PsiOperative' && class'MCPL_Utilities'.static.IsLW2Present())
+	{
+		UnitState.ResetSoldierAbilities();
+		UnitState.BuySoldierProgressionAbility(GameState, 0, 0);
+		UnitState.BuySoldierProgressionAbility(GameState, 0, 1);
+
+		GameState.AddStateObject(UnitState);
+
+		return ELR_NoInterrupt;
+	}
 	else if (NewClassName == 'PsiOperative')
 	{
 		UnitState.BuySoldierProgressionAbility(GameState, 0, 1);
